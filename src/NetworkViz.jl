@@ -6,4 +6,7 @@ module NetworkViz
     export layout_spring_adj
     include("spring.jl")
 
+    export find_edges
+    include("utils.jl")
+
 end # module

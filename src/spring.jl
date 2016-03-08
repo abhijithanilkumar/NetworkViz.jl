@@ -45,18 +45,11 @@ function layout_spring_adj{T}(adj_matrix::Array{T,2}; C=2.0, MAXITER=100, INITTE
                 d_z = locs_z[j] - locs_z[i]
                 d   = sqrt(d_x^2 + d_y^2 + d_z^2)
                 if adj_matrix[i,j] != zero(eltype(adj_matrix)) || adj_matrix[j,i] != zero(eltype(adj_matrix))
-                    # F = d^2 / K - K^2 / d
                     F_d = d / K - K^2 / d^2
                 else
-                    # Just repulsive
-                    # F = -K^2 / d^
                     F_d = -K^2 / d^2
                 end
-                # d  /          sin θ = d_y/d = fy/F
-                # F /| dy fy    -> fy = F*d_y/d
-                #  / |          cos θ = d_x/d = fx/F
-                # /---          -> fx = F*d_x/d
-                # dx fx
+
                 force_vec_x += F_d*d_x
                 force_vec_y += F_d*d_y
                 force_vec_z += F_d*d_z
@@ -65,16 +58,14 @@ function layout_spring_adj{T}(adj_matrix::Array{T,2}; C=2.0, MAXITER=100, INITTE
             force_y[i] = force_vec_y
             force_z[i] = force_vec_z
         end
-        # Cool down
+
         TEMP = INITTEMP / iter
         # Now apply them, but limit to temperature
         for i = 1:N
             force_mag  = sqrt(force_x[i]^2 + force_y[i]^2 + force_z[i]^2)
             scale      = min(force_mag, TEMP)/force_mag
             locs_x[i] += force_x[i] * scale
-            #locs_x[i]  = max(-1.0, min(locs_x[i], +1.0))
             locs_y[i] += force_y[i] * scale
-            #locs_y[i]  = max(-1.0, min(locs_y[i], +1.0))
             locs_z[i] += force_y[i] * scale
         end
     end
