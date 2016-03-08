@@ -7,6 +7,7 @@ module NetworkViz
     include("spring.jl")
 
     export find_edges
+    export drawwheel
     include("utils.jl")
 
 end # module

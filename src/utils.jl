@@ -1,4 +1,5 @@
 using NetworkViz
+using LightGraphs
 
 function find_edges(loc_x,loc_y,loc_z,adj_matrix)
 
