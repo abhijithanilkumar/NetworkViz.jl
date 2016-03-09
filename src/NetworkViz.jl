@@ -9,6 +9,8 @@ module NetworkViz
     export find_edges
     export drawwheel2D
     export drawwheel3D
+    export drawGraph3D
+    export addEdge
     include("utils.jl")
 
 end # module

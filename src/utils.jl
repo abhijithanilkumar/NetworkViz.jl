@@ -36,6 +36,10 @@ end
 
 function drawwheel3D(num::Int)
     g = WheelGraph(num)
+    drawGraph3D(g)
+end
+
+function drawGraph3D(g::Graph)
     am = full(adjacency_matrix(g))
     loc_x, loc_y, loc_z = layout_spring_adj_3D(am)
     pts = zip(loc_x,loc_y,loc_z)
@@ -45,13 +49,23 @@ end
 
 function drawwheel2D(num::Int)
     g = WheelGraph(num)
+    drawGraph2D(g)
+end
+
+function drawGraph2D(g::Graph)
     am = full(adjacency_matrix(g))
     loc_x, loc_y = layout_spring_adj(am)
     loc_z = zeros(size(loc_x))
     pts = zip(loc_x,loc_y,loc_z)
     vertices = find_edges(loc_x, loc_y, am)
     plot(collect(pts),vertices)
-end    
+end
+
+function addEdge(g::Graph, node1::Int, node2::Int)
+    add_edge!(g,node1,node2)
+    drawGraph3D(g)
+end
+
 
 function plot{T}(pts::Array{T,1}, vertices::Array{T,1})
   outerdiv() <<
