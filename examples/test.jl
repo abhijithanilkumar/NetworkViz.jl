@@ -16,7 +16,7 @@ main(window) = begin
             slider(10:100) >>> num
         ),
         lift(num) do n
-            drawwheel(n)
+            drawwheel2D(n)
         end
         ) |> pad(2em)
 end

@@ -1,7 +1,8 @@
-using NetworkViz
+import NetworkViz
 using LightGraphs
+using GraphLayout
 
-function find_edges(loc_x,loc_y,loc_z,adj_matrix)
+function find_edges{T}(loc_x::Array{Float64,1},loc_y::Array{Float64,1},loc_z::Array{Float64,1},adj_matrix::Array{T,2})
 
     size(adj_matrix, 1) != size(adj_matrix, 2) && error("Adj. matrix must be square.")
     vertices = Tuple{Float64, Float64, Float64}[]
@@ -17,11 +18,42 @@ function find_edges(loc_x,loc_y,loc_z,adj_matrix)
     return vertices
 end
 
-function drawwheel(num::Int)
-  g = WheelGraph(num); am = full(adjacency_matrix(g))
-  loc_x, loc_y, loc_z = layout_spring_adj(am)
-  pts = zip(loc_x,loc_y,loc_z)
-  vertices = find_edges(loc_x, loc_y, loc_z, am)
+function find_edges{T}(loc_x::Array{Float64,1},loc_y::Array{Float64,1},adj_matrix::Array{T,2})
+
+    size(adj_matrix, 1) != size(adj_matrix, 2) && error("Adj. matrix must be square.")
+    vertices = Tuple{Float64, Float64, Float64}[]
+    const N = length(loc_x)
+    for i = 1:N
+        for j = 1:N
+            i == j && continue
+            if adj_matrix[i,j] != zero(eltype(adj_matrix))
+                push!(vertices, (loc_x[i],loc_y[i],0), (loc_x[j],loc_y[j],0))
+            end
+        end
+    end
+    return vertices
+end
+
+function drawwheel3D(num::Int)
+    g = WheelGraph(num)
+    am = full(adjacency_matrix(g))
+    loc_x, loc_y, loc_z = layout_spring_adj_3D(am)
+    pts = zip(loc_x,loc_y,loc_z)
+    vertices = find_edges(loc_x, loc_y, loc_z, am)
+    plot(collect(pts),vertices)
+end
+
+function drawwheel2D(num::Int)
+    g = WheelGraph(num)
+    am = full(adjacency_matrix(g))
+    loc_x, loc_y = layout_spring_adj(am)
+    loc_z = zeros(size(loc_x))
+    pts = zip(loc_x,loc_y,loc_z)
+    vertices = find_edges(loc_x, loc_y, am)
+    plot(collect(pts),vertices)
+end    
+
+function plot{T}(pts::Array{T,1}, vertices::Array{T,1})
   outerdiv() <<
   (
   initscene() <<
