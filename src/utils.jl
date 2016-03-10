@@ -66,6 +66,10 @@ function addEdge(g::Graph, node1::Int, node2::Int)
     drawGraph3D(g)
 end
 
+function removeEdge(g::Graph, node1::Int, node2::Int)
+    rem_edge!(g,node1,node2)
+    drawGraph2D(g)
+end
 
 function plot{T}(pts::Array{T,1}, vertices::Array{T,1})
   outerdiv() <<

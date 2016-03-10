@@ -1,4 +1,5 @@
 """
+    Original Code Taken from GraphLayout.jl
     Use the spring/repulsion model of Fruchterman and Reingold (1991):
         Attractive force:  f_a(d) =  d^2 / k
         Repulsive force:  f_r(d) = -k^2 / d
