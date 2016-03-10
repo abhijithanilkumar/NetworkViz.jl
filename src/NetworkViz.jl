@@ -12,6 +12,8 @@ module NetworkViz
     export drawGraph3D
     export addEdge
     export removeEdge
+    export addNode
+    export removeNode
     include("utils.jl")
 
 end # module
