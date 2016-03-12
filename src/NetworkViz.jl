@@ -3,13 +3,12 @@ module NetworkViz
 # package code goes here
     using ThreeJS
 
-    export layout_spring_adj
+    export layout_spring
     include("spring.jl")
 
     export find_edges
-    export drawwheel2D
-    export drawwheel3D
-    export drawGraph3D
+    export drawWheel
+    export drawGraph
     export addEdge
     export removeEdge
     export addNode

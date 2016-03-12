@@ -7,7 +7,7 @@ using ThreeJS
 main(window) = begin
     num = Input(10)
     toggle = Input(false)
-    
+
     push!(window.assets,("ThreeJS","threejs"))
     push!(window.assets,"widgets")
         vbox(
@@ -21,16 +21,12 @@ main(window) = begin
         vbox(
             "2D/3D",
             hskip(2em),
-            togglebutton() >>> toggle 
+            togglebutton() >>> toggle
         ),
         vskip(2em),
 
         lift(toggle,num) do t,n
-            if t        
-                drawwheel3D(n)
-            else
-                drawwheel2D(n)
-            end
+            drawWheel(n,t)
         end
         ) |> pad(2em)
 end

@@ -30,7 +30,7 @@ main(window) = begin
       vbox(
           intent(s, form) >>> inp,
           vskip(2em),
-          addEdge(g, node1, node2)
+          addEdge(g, node1, node2, 0)
       ) |> Escher.pad(2em)
   end
 end

@@ -23,7 +23,7 @@ main(window) = begin
       vbox(
           intent(s, form) >>> inp,
           vskip(2em),
-          drawwheel3D(num)
+          drawwheel(num,1)
       ) |> Escher.pad(2em)
   end
 end

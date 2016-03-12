@@ -34,51 +34,41 @@ function find_edges{T}(loc_x::Array{Float64,1},loc_y::Array{Float64,1},adj_matri
     return vertices
 end
 
-function drawwheel3D(num::Int)
+function drawWheel(num::Int,z=1)
     g = WheelGraph(num)
-    drawGraph3D(g)
+    drawGraph(g,z)
 end
 
-function drawGraph3D(g::Graph)
+function drawGraph(g::Graph,z=1)
     am = full(adjacency_matrix(g))
-    loc_x, loc_y, loc_z = layout_spring_adj_3D(am)
+    loc_x, loc_y, loc_z = layout_spring(am,z)
     pts = zip(loc_x,loc_y,loc_z)
-    vertices = find_edges(loc_x, loc_y, loc_z, am)
+    if z == 1
+        vertices = find_edges(loc_x, loc_y, loc_z, am)
+    else
+        vertices = find_edges(loc_x, loc_y, am)
+    end
     plot(collect(pts),vertices)
 end
 
-function drawwheel2D(num::Int)
-    g = WheelGraph(num)
-    drawGraph2D(g)
-end
-
-function drawGraph2D(g::Graph)
-    am = full(adjacency_matrix(g))
-    loc_x, loc_y = layout_spring_adj(am)
-    loc_z = zeros(size(loc_x))
-    pts = zip(loc_x,loc_y,loc_z)
-    vertices = find_edges(loc_x, loc_y, am)
-    plot(collect(pts),vertices)
-end
-
-function addEdge(g::Graph, node1::Int, node2::Int)
+function addEdge(g::Graph, node1::Int, node2::Int, z=1)
     add_edge!(g,node1,node2)
-    drawGraph3D(g)
+    drawGraph(g,z)
 end
 
-function removeEdge(g::Graph, node1::Int, node2::Int)
+function removeEdge(g::Graph, node1::Int, node2::Int, z=1)
     rem_edge!(g,node1,node2)
-    drawGraph2D(g)
+    drawGraph(g,z)
 end
 
-function addNode(g::Graph)
+function addNode(g::Graph, z=1)
     add_vertex!(g)
-    drawGraph3D(g)
+    drawGraph(g,z)
 end
 
-function removeNode(g::Graph, node::Int)
+function removeNode(g::Graph, node::Int, z=1)
     rem_vertex!(g,node)
-    drawGraph2D(g)
+    drawGraph(g,z)
 end
 
 function plot{T}(pts::Array{T,1}, vertices::Array{T,1})

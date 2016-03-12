@@ -14,7 +14,7 @@
     MAXITER    Number of iterations we apply the forces
     INITTEMP   Initial "temperature", controls movement per iteration
 """
-function layout_spring_adj_3D{T}(adj_matrix::Array{T,2}; C=2.0, MAXITER=100, INITTEMP=2.0)
+function layout_spring{T}(adj_matrix::Array{T,2}, dim=1; C=2.0, MAXITER=100, INITTEMP=2.0)
 
     size(adj_matrix, 1) != size(adj_matrix, 2) && error("Adj. matrix must be square.")
     const N = size(adj_matrix, 1)
@@ -81,6 +81,10 @@ function layout_spring_adj_3D{T}(adj_matrix::Array{T,2}; C=2.0, MAXITER=100, INI
     map!(z -> scaler(z, min_x, max_x), locs_x)
     map!(z -> scaler(z, min_y, max_y), locs_y)
     map!(z -> scaler(z, min_z, max_z), locs_z)
+
+    if dim == 0
+        locs_z = zeros(size(locs_x))
+    end    
 
     return locs_x,locs_y,locs_z
 end
