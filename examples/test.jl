@@ -25,16 +25,11 @@ main(window) = begin
         ),
         vskip(2em),
 
-        lift(toggle) do t
+        lift(toggle,num) do t,n
             if t        
-                lift(num) do n
-                    drawwheel3D(n)
-                end
-            
+                drawwheel3D(n)
             else
-                lift(num) do n
-                    drawwheel2D(n)
-                end
+                drawwheel2D(n)
             end
         end
         ) |> pad(2em)
