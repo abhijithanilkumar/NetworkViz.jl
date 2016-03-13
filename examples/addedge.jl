@@ -7,8 +7,6 @@ using Escher
 
 g = Graph(10)
 
-@show typeof(g)
-
 main(window) = begin
   push!(window.assets, "widgets")
   push!(window.assets,("ThreeJS","threejs"))

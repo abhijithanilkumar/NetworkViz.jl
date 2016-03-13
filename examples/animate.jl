@@ -1,17 +1,17 @@
 #Run this in Escher to see a growing Complete Graph in the browser.
 
 
-import ThreeJS
+using ThreeJS
+using NetworkViz
+using LightGraphs
 
 main(window) =  begin
+    g = Graph(10)
     push!(window.assets,("ThreeJS","threejs"))
-    eventloop = every(1/60)
-    n = 2
-    map(eventloop) do _
-        n += 1
-        if n == 100
-          break
-        end
-        drawWheel(n,1)
+    fps1 = fps(1)
+    frames = foldp(+, 1, map((x)->1, fps1))
+    running = map(x->x<9, frames)
+    map(fpswhen(running, 1)) do _
+        addEdge(g,frames.value,frames.value+1,1)
     end
 end

@@ -39,8 +39,19 @@ function drawWheel(num::Int,z=1)
     drawGraph(g,z)
 end
 
-function drawGraph(g::Graph,z=1)
+function drawGraph(g::Union{LightGraphs.DiGraph,LightGraphs.Graph},z=1)
     am = full(adjacency_matrix(g))
+    loc_x, loc_y, loc_z = layout_spring(am,z)
+    pts = zip(loc_x,loc_y,loc_z)
+    if z == 1
+        vertices = find_edges(loc_x, loc_y, loc_z, am)
+    else
+        vertices = find_edges(loc_x, loc_y, am)
+    end
+    plot(collect(pts),vertices)
+end
+
+function drawGraph{T}(am::Array{T,2},z=1)
     loc_x, loc_y, loc_z = layout_spring(am,z)
     pts = zip(loc_x,loc_y,loc_z)
     if z == 1

@@ -5,8 +5,8 @@ using NetworkViz
 using ThreeJS
 
 main(window) = begin
-    num = Input(10)
-    toggle = Input(false)
+    num = Signal(10)
+    toggle = Signal(false)
 
     push!(window.assets,("ThreeJS","threejs"))
     push!(window.assets,"widgets")
@@ -25,7 +25,7 @@ main(window) = begin
         ),
         vskip(2em),
 
-        lift(toggle,num) do t,n
+        map(toggle,num) do t,n
             drawWheel(n,t)
         end
         ) |> pad(2em)
