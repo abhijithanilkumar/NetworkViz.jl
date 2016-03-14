@@ -17,8 +17,8 @@ main(window) = begin
   sampler = Escher.sampler()
   form = vbox(
       h1("Add New Edge"),
-      watch!(s, :node1, textinput("", label="Node1")),
-      watch!(s, :node2, textinput("", label="Node2")),
+      watch!(s, :node1, textinput("", label="Source Vertex")),
+      watch!(s, :node2, textinput("", label="Destination Vertex")),
       trigger!(s, :submit, button("Submit"))
   ) |> maxwidth(400px)
 
