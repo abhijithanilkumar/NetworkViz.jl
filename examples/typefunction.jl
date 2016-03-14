@@ -64,6 +64,7 @@ main(window) =  begin
                     )
         plugsampler(s,
         vbox(
+
                 md"""Enter a valid graph function.
                     `ctrl+enter` or `shift+enter` to redraw the plot.
                     Use the mouse the drag, zoom and pan.
