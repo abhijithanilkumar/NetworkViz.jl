@@ -10,5 +10,4 @@ notifications:
   email: false
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-  - julia --check-bounds=yes -e 'Pkg.checkout("ThreeJS")'
-  - julia -e 'Pkg.clone(pwd()); Pkg.build("NetworkViz"); Pkg.test("NetworkViz"; coverage=true)'
+  - julia -e 'Pkg.clone(pwd()); Pkg.build("NetworkViz"); Pkg.checkout("ThreeJS"); Pkg.test("NetworkViz"; coverage=true)'
