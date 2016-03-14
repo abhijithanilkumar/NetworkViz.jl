@@ -27,7 +27,7 @@ main(window) = begin
 
         map(toggle,num) do t,n
             g = WheelGraph(n)
-            drawGraph(g,1)
+            drawGraph(g,t)
         end
         ) |> pad(2em)
 end
