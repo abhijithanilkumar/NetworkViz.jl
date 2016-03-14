@@ -1,3 +1,5 @@
+# Edge Animation
+
 using ThreeJS
 using NetworkViz
 using LightGraphs
