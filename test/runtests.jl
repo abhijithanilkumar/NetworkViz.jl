@@ -5,6 +5,7 @@ using FactCheck
 using Patchwork: Elem
 using LightGraphs
 using BaseTestNext
+using ThreeJS
 
 # write your own tests here
 
