@@ -3,6 +3,8 @@ using LightGraphs
 using GraphLayout
 using Colors
 
+export layout_spring, find_edges, drawWheel, drawGraph, drawGraphwithText, addEdge, removeEdge, addNode, removeNode
+
 function find_edges{T}(loc_x::Array{Float64,1},loc_y::Array{Float64,1},loc_z::Array{Float64,1},adj_matrix::Array{T,2})
 
     size(adj_matrix, 1) != size(adj_matrix, 2) && error("Adj. matrix must be square.")
@@ -103,4 +105,35 @@ function plot{T}(pts::Array{T,1}, vertices::Array{T,1})
       camera(0.0, 0.0, 5.0)
   ]
   )
+end
+
+function drawGraphwithText(g::Union{LightGraphs.DiGraph,LightGraphs.Graph},z=1)
+    am = full(adjacency_matrix(g))
+    loc_x, loc_y, loc_z = layout_spring(am,z)
+    pts = zip(loc_x,loc_y,loc_z)
+    if z == 1
+        vertices = find_edges(loc_x, loc_y, loc_z, am)
+    else
+        vertices = find_edges(loc_x, loc_y, am)
+    end
+    outerdiv() <<
+    (
+    initscene() <<
+    [
+        ThreeJS.pointcloud(collect(pts)) <<
+        [
+          ThreeJS.pointmaterial(Dict(
+          :color=>"blue",
+          :size=>0.05,
+          ))
+        ],
+        ThreeJS.line(vertices,kind="pieces") <<
+        [
+            ThreeJS.linematerial(Dict(:color=>"yellow"))
+        ],
+        [ThreeJS.text(map(x->x+0.05,item)...,"$idx") for (idx,item) in enumerate(pts)],
+        pointlight(3.0, 3.0, 3.0),
+        camera(0.0, 0.0, 5.0)
+    ]
+    )
 end
