@@ -64,12 +64,10 @@ main(window) =  begin
                     )
         plugsampler(s,
         vbox(
-                md"""Enter an anonymous function with 2 variables.
+                md"""Enter any valid graph functions.
                     `ctrl+enter` or `shift+enter` to redraw the plot.
                     Use the mouse the drag, zoom and pan.
-                    The function is plotted with x and y between -10 and 10 and
-                    with 100 steps and 50 steps in both axes for the surf and the
-                    mesh respectively. Try resizing the browser if you cant see a codebox""",
+                    Try resizing the browser if you cant see a codebox""",
                 code_cell,
                 vskip(2em),
                 t, plots
