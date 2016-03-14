@@ -43,12 +43,6 @@ end
         plot = drawGraph(dgraph,1)
         @test typeof(plot) == Elem{:xhtml,:div}
     end
-    @testset "addEdge" begin
-        plot = addEdge(g,3,7,0)
-        @test typeof(plot) == Elem{:xhtml,:div}
-        plot = addEdge(g,3,7,1)
-        @test typeof(plot) == Elem{:xhtml,:div}
-    end
 end
 
 end #module
