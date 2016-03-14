@@ -1,4 +1,4 @@
-#Run this in Escher to visualize a WheelGraph
+# Run this in Escher to visualize a Complete Graph with Vertex identification
 
 using LightGraphs
 using NetworkViz

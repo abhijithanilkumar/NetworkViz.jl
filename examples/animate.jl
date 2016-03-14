@@ -1,4 +1,4 @@
-#Run this in Escher to see a growing Complete Graph in the browser.
+#Example which demonstrates basic animation
 
 
 using ThreeJS
@@ -11,7 +11,10 @@ main(window) =  begin
     fps1 = fps(1)
     frames = foldp(+, 1, map((x)->1, fps1))
     running = map(x->x<49, frames)
+
+    vbox(
     map(fpswhen(running, 1)) do _
         drawGraph(WheelGraph(frames.value+1),1)
     end
+    )
 end

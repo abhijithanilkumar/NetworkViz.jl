@@ -1,4 +1,4 @@
-#Run this in Escher to visualize a WheelGraph
+# Example which demonstrates adding an edge
 
 using LightGraphs
 using NetworkViz
@@ -19,7 +19,7 @@ main(window) = begin
       h1("Add New Edge"),
       watch!(s, :node1, textinput("", label="Source Vertex")),
       watch!(s, :node2, textinput("", label="Destination Vertex")),
-      trigger!(s, :submit, button("Submit"))
+      trigger!(s, :submit, button("Add Edge"))
   ) |> maxwidth(400px)
 
   map(inp) do dict

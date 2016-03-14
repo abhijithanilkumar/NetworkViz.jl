@@ -1,4 +1,4 @@
-#Run this in Escher to visualize a WheelGraph
+# Example which demonstrates removing an edge
 
 using LightGraphs
 using NetworkViz
@@ -19,9 +19,9 @@ main(window) = begin
   sampler = Escher.sampler()
   form = vbox(
       h1("Remove Edge"),
-      watch!(s, :node1, textinput("", label="Node1")),
-      watch!(s, :node2, textinput("", label="Node2")),
-      trigger!(s, :submit, button("Submit"))
+      watch!(s, :node1, textinput("", label="Source Vertex")),
+      watch!(s, :node2, textinput("", label="Destination Vertex")),
+      trigger!(s, :submit, button("Remove Edge"))
   ) |> maxwidth(400px)
 
   map(inp) do dict

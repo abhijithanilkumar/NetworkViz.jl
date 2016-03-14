@@ -1,3 +1,5 @@
+# Breadth First Search Example
+
 using ThreeJS
 using Escher
 using LightGraphs

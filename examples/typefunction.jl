@@ -1,9 +1,10 @@
+# Example to demonstrate the use of a codemirror. 
+
 using ThreeJS
 using Colors: colormap
 using LightGraphs
 using NetworkViz
 
-# Run in Escher to get updatable surf and mesh plots
 
 g = Graph(10)
 
