@@ -1,6 +1,7 @@
 import NetworkViz
 using LightGraphs
 using GraphLayout
+using Colors
 
 function find_edges{T}(loc_x::Array{Float64,1},loc_y::Array{Float64,1},loc_z::Array{Float64,1},adj_matrix::Array{T,2})
 
@@ -91,7 +92,7 @@ function plot{T}(pts::Array{T,1}, vertices::Array{T,1})
       [
         ThreeJS.pointmaterial(Dict(
         :color=>"blue",
-        :size=>0.05
+        :size=>0.05,
         ))
       ],
       ThreeJS.line(vertices,kind="pieces") <<

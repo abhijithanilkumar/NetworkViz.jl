@@ -38,15 +38,30 @@ main(window) =  begin
     push!(window.assets,"widgets")
     push!(window.assets, "codemirror")
     push!(window.assets, "layout2")
-    default = "(x,y) -> sin(x) * cos(y)"
+    default = "g = CompleteGraph(10)"
     inp = Signal(Dict{Any, Any}(:name=>default))
     s = sampler() # A thing that lets you watch widgets/behaviors upon updates to other behaviors
     editor = watch!(s, :code, codemirror(default))
     code_cell = trigger!(s, :submit, keypress("ctrl+enter shift+enter", editor))
-    map(inp) do f
-        fn = get(f,:code,default)
-        eval(parse(fn))
-        @show g
+    t, plots = wire(
+                        tabs(["3D View";"2D View";]),
+                        pages(
+                        [
+                            map(inp) do f
+                                fn = get(f,:code,default)
+                                eval(parse(fn))
+                                drawGraph(g,1)
+                            end;
+                            map(inp) do f
+                                fn = get(f,:code,default)
+                                eval(parse(fn))
+                                drawGraph(g,0)
+                            end;
+                        ]
+                        ),
+                        :tab_channel,
+                        :selected
+                    )
         plugsampler(s,
         vbox(
                 md"""Enter an anonymous function with 2 variables.
@@ -57,8 +72,7 @@ main(window) =  begin
                     mesh respectively. Try resizing the browser if you cant see a codebox""",
                 code_cell,
                 vskip(2em),
-            drawGraph(g,1)
+                t, plots
             ) |> pad(2em)
    ) >>> inp
- end
 end
