@@ -68,7 +68,7 @@ end
 The above example when run in Escher shows the visualization of a `WheelGraph` based on input from the slider. The working demo can be seen [here](https://youtu.be/qd8LmY2XBHg).
 
 
-[Here] is another example with a code-mirror where functions can be typed in. Depending on the LightGraphs function used, 2D as well as 3D graphs are drawn. You can see the working demo [here](https://www.youtube.com/watch?v=Ac3cneCRTZo).
+[Here](https://github.com/abhijithanilkumar/NetworkViz.jl/blob/master/examples/codemirror.jl) is another example with a code-mirror where functions can be typed in. Depending on the LightGraphs function used, 2D as well as 3D graphs are drawn. You can see the working demo [here](https://www.youtube.com/watch?v=Ac3cneCRTZo).
 
 You can find many other examples in the `examples/` folder.
 
