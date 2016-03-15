@@ -1,5 +1,6 @@
 ## NetworkViz
 Linux, OSX : [![Build Status](https://travis-ci.org/abhijithanilkumar/NetworkViz.jl.svg)](https://travis-ci.org/abhijithanilkumar/NetworkViz.jl)
+Windows : [![Build status](https://ci.appveyor.com/api/projects/status/c7ktq0w08yq281gt?svg=true)](https://ci.appveyor.com/project/abhijithanilkumar/networkviz-jl)
 
 A Julia module to render graphs in 3D using [ThreeJS](https://github.com/rohitvarkey/ThreeJS.jl) tightly coupled with [LightGraphs](https://github.com/JuliaGraphs/LightGraphs.jl).
 
@@ -15,7 +16,7 @@ Pkg.checkout("ThreeJS")
 
 ### Visualizing Graphs
 
-The `drawGraph` function can be used to draw the graphs in 2D or 3D. It can accept `LightGraph.Graph` and `LightGraph.Digraph` types. `drawGraph` can be used to draw graphs from adjacency matrices also. The function accepts an additional argument `z`. If `z=1`, it draws a 3D graph. If `z=0`, a 2D visualization of the graph is drawn.
+The `drawGraph` function can be used to draw the graphs in 2D or 3D. It can accept `LightGraphs.Graph` and `LightGraphs.Digraph` types. `drawGraph` can be used to draw graphs from adjacency matrices also. The function accepts an additional argument `z`. If `z=1`, it draws a 3D graph. If `z=0`, a 2D visualization of the graph is drawn.
 
 Usage : 
 ```julia
