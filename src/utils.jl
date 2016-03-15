@@ -1,6 +1,5 @@
 import NetworkViz
 using LightGraphs
-using GraphLayout
 using Colors
 
 export layout_spring, find_edges, drawWheel, drawGraph, drawGraphwithText, addEdge, removeEdge, addNode, removeNode
