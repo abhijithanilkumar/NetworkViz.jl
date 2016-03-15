@@ -1,4 +1,4 @@
-# Example which demonstrates adding an edge
+# Example which demonstrates adding an edge to a Graph
 
 using LightGraphs
 using NetworkViz
