@@ -73,4 +73,4 @@ You can find many other examples in the `examples/` folder.
 
 ### Acknowledgement
 
-[IainNZ](https://github.com/IainNZ) for the original Spring-Embedder code. (Taken from [GraphLayout.jl](https://github.com/IainNZ/GraphLayout.jl/blame/master/src/spring.jl)).
+[IainNZ](https://github.com/IainNZ) for the original Spring-Embedder code. (Taken from [GraphLayout.jl](https://github.com/IainNZ/GraphLayout.jl/blob/master/src/spring.jl)).
