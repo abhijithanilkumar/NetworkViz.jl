@@ -7,8 +7,10 @@ A Julia module to render graphs in 3D using [ThreeJS](https://github.com/rohitva
 
 ### Install
 
+In a Julia REPL, run:
+
 ```julia
-Pkg.clone("https://github.com/abhijithanilkumar/NetworkViz.jl")
+Pkg.add("NetworkViz")
 ```
 ### Graph Algorithms Used
 
