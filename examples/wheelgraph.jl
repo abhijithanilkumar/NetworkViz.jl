@@ -27,6 +27,7 @@ main(window) = begin
 
         map(toggle,num) do t,n
             g = WheelGraph(n)
+            color = distinguishable_colors(n)
             drawGraph(g,t)
         end
         ) |> pad(2em)

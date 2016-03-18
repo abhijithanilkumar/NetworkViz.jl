@@ -41,10 +41,10 @@ function drawWheel(num::Int,z=1)
     drawGraph(g,z)
 end
 
-function drawGraph(g::Union{LightGraphs.DiGraph,LightGraphs.Graph},z=1)
+function drawGraph(g::Union{LightGraphs.DiGraph,LightGraphs.Graph},color::Vector{Color}=Color[],z=1)
     am = full(adjacency_matrix(g))
     loc_x, loc_y, loc_z = layout_spring(am,z)
-    pts = zip(loc_x,loc_y,loc_z)
+    pts = zip(loc_x,loc_y,loc_z,color)
     if z == 1
         vertices = find_edges(loc_x, loc_y, loc_z, am)
     else
@@ -53,9 +53,9 @@ function drawGraph(g::Union{LightGraphs.DiGraph,LightGraphs.Graph},z=1)
     plot(collect(pts),vertices)
 end
 
-function drawGraph{T}(am::Array{T,2},z=1)
+function drawGraph{T}(am::Array{T,2},color::Vector{Color}=Color[],z=1)
     loc_x, loc_y, loc_z = layout_spring(am,z)
-    pts = zip(loc_x,loc_y,loc_z)
+    pts = zip(loc_x,loc_y,loc_z,color)
     if z == 1
         vertices = find_edges(loc_x, loc_y, loc_z, am)
     else
@@ -92,7 +92,7 @@ function plot{T}(pts::Array{T,1}, vertices::Array{T,1})
       ThreeJS.pointcloud(collect(pts)) <<
       [
         ThreeJS.pointmaterial(Dict(
-        :color=>"blue",
+        :color=>"white",
         :size=>0.05,
         ))
       ],
