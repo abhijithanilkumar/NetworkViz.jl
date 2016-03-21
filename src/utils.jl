@@ -1,5 +1,6 @@
 import NetworkViz
 using LightGraphs
+using ThreeJS
 using Colors
 
 export layout_spring, find_edges, drawWheel, drawGraph, drawGraphwithText, addEdge, removeEdge, addNode, removeNode, layout_spring, plot
@@ -84,7 +85,7 @@ function removeNode(g::Graph, node::Int, z=1)
     drawGraph(g,z)
 end
 
-function plot{T}(pts::Array{T,1}, vertices::Array{T,1})
+function plot{T}(pts::Array{T,1}, vertices::Array{Tuple{Float64,Float64,Float64},1})
   outerdiv() <<
   (
   initscene() <<
@@ -94,6 +95,7 @@ function plot{T}(pts::Array{T,1}, vertices::Array{T,1})
         ThreeJS.pointmaterial(Dict(
         :color=>"white",
         :size=>0.05,
+        :colorkind=>"vertex",
         ))
       ],
       ThreeJS.line(vertices,kind="pieces") <<
