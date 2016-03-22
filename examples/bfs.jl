@@ -33,12 +33,12 @@ main(window) = begin
             if t
               vbox(
                 md"""## Original Graph""",
-                drawGraph(CompleteGraph(n1),1)
+                drawGraph(CompleteGraph(n1),z=1)
               )
             else
               vbox(
                 md"""## BFS Traversal of the Graph""",
-                drawGraph(bfs_tree(CompleteGraph(n2),1),1)
+                drawGraph(bfs_tree(CompleteGraph(n2),1),z=1)
               )
             end
           )
