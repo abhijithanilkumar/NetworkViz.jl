@@ -1,7 +1,7 @@
 ## NetworkViz
-Linux, OSX : [![Build Status](https://travis-ci.org/abhijithanilkumar/NetworkViz.jl.svg)](https://travis-ci.org/abhijithanilkumar/NetworkViz.jl)
+Linux, OSX : [![Build Status](https://travis-ci.org/abhijithanilkumar/NetworkViz.jl.svg?branch=master)](https://travis-ci.org/abhijithanilkumar/NetworkViz.jl)
 
-Windows : [![Build status](https://ci.appveyor.com/api/projects/status/c7ktq0w08yq281gt?svg=true)](https://ci.appveyor.com/project/abhijithanilkumar/networkviz-jl)
+Windows : [![Build status](https://ci.appveyor.com/api/projects/status/c7ktq0w08yq281gt/branch/master?svg=true)](https://ci.appveyor.com/project/abhijithanilkumar/networkviz-jl/branch/master)
 
 A Julia module to render graphs in 3D using [ThreeJS](https://github.com/rohitvarkey/ThreeJS.jl) tightly coupled with [LightGraphs](https://github.com/JuliaGraphs/LightGraphs.jl).
 

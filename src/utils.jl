@@ -54,7 +54,7 @@ function drawGraph{T <: Color}(g::Union{LightGraphs.DiGraph,LightGraphs.Graph};c
     plot(collect(pts),vertices)
 end
 
-function drawGraph{T <: Color}(am::Array{Int64,2};color::Vector{T}=Color[parse(Colorant,"blue") for i in 1:nv(g)],z=1)
+function drawGraph{T <: Color}(am::Array{Int64,2};color::Vector{T}=Color[parse(Colorant,"blue") for i in 1:size(am,1)],z=1)
     loc_x, loc_y, loc_z = layout_spring(am,z)
     pts = zip(loc_x,loc_y,loc_z,color)
     if z == 1
