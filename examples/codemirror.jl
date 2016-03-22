@@ -23,12 +23,12 @@ main(window) =  begin
                             map(inp) do f
                                 fn = get(f,:code,default)
                                 eval(parse(fn))
-                                drawGraph(g,1)
+                                drawGraph(g,z=1)
                             end;
                             map(inp) do f
                                 fn = get(f,:code,default)
                                 eval(parse(fn))
-                                drawGraph(g,0)
+                                drawGraph(g,z=0)
                             end;
                         ]
                         ),

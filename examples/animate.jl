@@ -14,7 +14,7 @@ main(window) =  begin
 
     vbox(
     map(fpswhen(running, 1)) do _
-        drawGraph(WheelGraph(frames.value+1),1)
+        drawGraph(WheelGraph(frames.value+1),z=1)
     end
     )
 end

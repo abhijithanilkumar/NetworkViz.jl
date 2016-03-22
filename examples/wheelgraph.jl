@@ -3,6 +3,7 @@
 using LightGraphs
 using NetworkViz
 using ThreeJS
+using Colors
 
 main(window) = begin
     num = Signal(10)
@@ -27,7 +28,8 @@ main(window) = begin
 
         map(toggle,num) do t,n
             g = WheelGraph(n)
-            drawGraph(g,t)
+            c = distinguishable_colors(nv(g))
+            drawGraph(g,z=t)
         end
         ) |> pad(2em)
 end

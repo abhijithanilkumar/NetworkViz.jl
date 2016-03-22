@@ -1,7 +1,7 @@
 ## NetworkViz
-Linux, OSX : [![Build Status](https://travis-ci.org/abhijithanilkumar/NetworkViz.jl.svg)](https://travis-ci.org/abhijithanilkumar/NetworkViz.jl)
+Linux, OSX : [![Build Status](https://travis-ci.org/abhijithanilkumar/NetworkViz.jl.svg?branch=master)](https://travis-ci.org/abhijithanilkumar/NetworkViz.jl)
 
-Windows : [![Build status](https://ci.appveyor.com/api/projects/status/c7ktq0w08yq281gt?svg=true)](https://ci.appveyor.com/project/abhijithanilkumar/networkviz-jl)
+Windows : [![Build status](https://ci.appveyor.com/api/projects/status/c7ktq0w08yq281gt/branch/master?svg=true)](https://ci.appveyor.com/project/abhijithanilkumar/networkviz-jl/branch/master)
 
 A Julia module to render graphs in 3D using [ThreeJS](https://github.com/rohitvarkey/ThreeJS.jl) tightly coupled with [LightGraphs](https://github.com/JuliaGraphs/LightGraphs.jl).
 
@@ -18,17 +18,17 @@ Pkg.add("NetworkViz")
 
 ### Visualizing Graphs
 
-The `drawGraph` function can be used to draw the graphs in 2D or 3D. It can accept `LightGraphs.Graph` and `LightGraphs.Digraph` types. `drawGraph` can be used to draw graphs from adjacency matrices also. The function accepts an additional argument `z`. If `z=1`, it draws a 3D graph. If `z=0`, a 2D visualization of the graph is drawn.
+The `drawGraph` function can be used to draw the graphs in 2D or 3D with nodes having different colors. It can accept `LightGraphs.Graph` and `LightGraphs.Digraph` types. `drawGraph` can be used to draw graphs from adjacency matrices also. The function accepts an additional kwargs `z` and `color`. If `z=1`, it draws a 3D graph. If `z=0`, a 2D visualization of the graph is drawn. `color` is an array of node colors.
 
 Usage :
 ```julia
 g = CompleteGraph(10)
-drawGraph(g,1) #Draw using a Graph object (3D).
+drawGraph(g,z=1) #Draw using a Graph object (3D).
 am = full(adjacency_matrix(g))
-drawGraph(am,0) #Draw using an adjacency matrix (2D).
+drawGraph(am,z=0) #Draw using an adjacency matrix (2D).
 
 dgraph = bfs_tree(g,1)
-drawGraph(dgraph,1) #Draw a Digraph.
+drawGraph(dgraph,z=1) #Draw a Digraph.
 ```
 ### Utility Functions
 
@@ -60,7 +60,7 @@ main(window) = begin
 
         map(num) do n
             g = WheelGraph(n)
-            drawGraph(g,1)
+            drawGraph(g,z=1)
         end
         ) |> pad(2em)
 end

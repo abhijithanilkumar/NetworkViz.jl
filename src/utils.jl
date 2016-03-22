@@ -1,5 +1,6 @@
 import NetworkViz
 using LightGraphs
+using ThreeJS
 using Colors
 
 export layout_spring, find_edges, drawWheel, drawGraph, drawGraphwithText, addEdge, removeEdge, addNode, removeNode, layout_spring, plot
@@ -36,15 +37,15 @@ function find_edges{T}(loc_x::Array{Float64,1},loc_y::Array{Float64,1},adj_matri
     return vertices
 end
 
-function drawWheel(num::Int,z=1)
+function drawWheel(num::Int,t=1)
     g = WheelGraph(num)
-    drawGraph(g,z)
+    drawGraph(g,z=t)
 end
 
-function drawGraph(g::Union{LightGraphs.DiGraph,LightGraphs.Graph},z=1)
+function drawGraph{T <: Color}(g::Union{LightGraphs.DiGraph,LightGraphs.Graph};color::Vector{T}=Color[parse(Colorant,"blue") for i in 1:nv(g)],z=1)
     am = full(adjacency_matrix(g))
     loc_x, loc_y, loc_z = layout_spring(am,z)
-    pts = zip(loc_x,loc_y,loc_z)
+    pts = zip(loc_x,loc_y,loc_z,color)
     if z == 1
         vertices = find_edges(loc_x, loc_y, loc_z, am)
     else
@@ -53,9 +54,9 @@ function drawGraph(g::Union{LightGraphs.DiGraph,LightGraphs.Graph},z=1)
     plot(collect(pts),vertices)
 end
 
-function drawGraph{T}(am::Array{T,2},z=1)
+function drawGraph{T <: Color}(am::Array{Int64,2};color::Vector{T}=Color[parse(Colorant,"blue") for i in 1:size(am,1)],z=1)
     loc_x, loc_y, loc_z = layout_spring(am,z)
-    pts = zip(loc_x,loc_y,loc_z)
+    pts = zip(loc_x,loc_y,loc_z,color)
     if z == 1
         vertices = find_edges(loc_x, loc_y, loc_z, am)
     else
@@ -64,27 +65,27 @@ function drawGraph{T}(am::Array{T,2},z=1)
     plot(collect(pts),vertices)
 end
 
-function addEdge(g::Graph, node1::Int, node2::Int, z=1)
+function addEdge(g::Graph, node1::Int, node2::Int, t=1)
     add_edge!(g,node1,node2)
-    drawGraph(g,z)
+    drawGraph(g,z=t)
 end
 
-function removeEdge(g::Graph, node1::Int, node2::Int, z=1)
+function removeEdge(g::Graph, node1::Int, node2::Int, t=1)
     rem_edge!(g,node1,node2)
-    drawGraph(g,z)
+    drawGraph(g,z=t)
 end
 
-function addNode(g::Graph, z=1)
+function addNode(g::Graph, t=1)
     add_vertex!(g)
-    drawGraph(g,z)
+    drawGraph(g,z=t)
 end
 
-function removeNode(g::Graph, node::Int, z=1)
+function removeNode(g::Graph, node::Int, t=1)
     rem_vertex!(g,node)
-    drawGraph(g,z)
+    drawGraph(g,z=t)
 end
 
-function plot{T}(pts::Array{T,1}, vertices::Array{T,1})
+function plot{T}(pts::Array{T,1}, vertices::Array{Tuple{Float64,Float64,Float64},1})
   outerdiv() <<
   (
   initscene() <<
@@ -92,8 +93,9 @@ function plot{T}(pts::Array{T,1}, vertices::Array{T,1})
       ThreeJS.pointcloud(collect(pts)) <<
       [
         ThreeJS.pointmaterial(Dict(
-        :color=>"blue",
+        :color=>"white",
         :size=>0.05,
+        :colorkind=>"vertex",
         ))
       ],
       ThreeJS.line(vertices,kind="pieces") <<
