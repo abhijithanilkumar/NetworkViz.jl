@@ -54,7 +54,7 @@ function drawGraph{T <: Color}(g::Union{LightGraphs.DiGraph,LightGraphs.Graph};c
     plot(collect(pts),vertices)
 end
 
-function drawGraph{T <: Color}(am::Array{Int64,2};color::Vector{T}=Color[parse(Colorant,"blue") for i in 1:size(am,1)],z=1)
+function drawGraph{T <: Color}(am::Array{Int64,2};color::Vector{T}=Color[parse(Colorant,"#00004d") for i in 1:size(am,1)],z=1)
     loc_x, loc_y, loc_z = layout_spring(am,z)
     pts = zip(loc_x,loc_y,loc_z,color)
     if z == 1
@@ -94,13 +94,16 @@ function plot{T}(pts::Array{T,1}, vertices::Array{Tuple{Float64,Float64,Float64}
       [
         ThreeJS.pointmaterial(Dict(
         :color=>"white",
-        :size=>0.05,
+        :size=>0.2,
         :colorkind=>"vertex",
+        :transparent=>true,
+        :texture=>"/assets/disc.png",
+        :alphatest=>0.5
         ))
       ],
       ThreeJS.line(vertices,kind="pieces") <<
       [
-          ThreeJS.linematerial(Dict(:color=>"yellow"))
+          ThreeJS.linematerial(Dict(:color=>"#ff3333"))
       ],
       pointlight(3.0, 3.0, 3.0),
       camera(0.0, 0.0, 5.0)

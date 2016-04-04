@@ -28,8 +28,8 @@ main(window) = begin
 
         map(toggle,num) do t,n
             g = WheelGraph(n)
-            c = distinguishable_colors(nv(g))
-            drawGraph(g,z=t)
+            c = Color[parse(Colorant,"#00004d") for i in 1:nv(g)]
+            drawGraph(g,color=c,z=t)
         end
         ) |> pad(2em)
 end
