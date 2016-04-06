@@ -43,7 +43,7 @@ function drawWheel(num::Int,t=1)
 end
 
 function drawGraph(g::Union{LightGraphs.DiGraph,LightGraphs.Graph};
-                               node=NodeProperty(Color[parse(Colorant,"#00004d") for i in 1:nv(g)],0.7,0),
+                               node=NodeProperty(Color[parse(Colorant,"#00004d") for i in 1:nv(g)],0.5,1),
                                edge=EdgeProperty("#ff3333",2),
                                z=1
                               )
@@ -59,12 +59,12 @@ function drawGraph(g::Union{LightGraphs.DiGraph,LightGraphs.Graph};
 end
 
 function drawGraph(am::Array{Int64,2};
-                            node=NodeProperty(Color[parse(Colorant,"#00004d") for i in 1:size(am,1)],0.7,0),
+                            node=NodeProperty(Color[parse(Colorant,"#00004d") for i in 1:size(am,1)],0.5,1),
                             edge=EdgeProperty("#ff3333",2),
                             z=1
                            )
     loc_x, loc_y, loc_z = layout_spring(am,z)
-    pts = zip(loc_x,loc_y,loc_z,color)
+    pts = zip(loc_x,loc_y,loc_z,node.color)
     if z == 1
         vertices = find_edges(loc_x, loc_y, loc_z, am)
     else
@@ -156,15 +156,22 @@ function drawGraphwithText(g::Union{LightGraphs.DiGraph,LightGraphs.Graph},z=1)
         ThreeJS.pointcloud(collect(pts)) <<
         [
           ThreeJS.pointmaterial(Dict(
-          :color=>"blue",
-          :size=>0.05,
+          :color=>"#00004d",
+          :size=>0.5,
+          :transparent=>true,
+          :alphatest=>0.2,
+          :texture=>"/pkg/NetworkViz/disc.png",
           ))
         ],
         ThreeJS.line(vertices,kind="pieces") <<
         [
-            ThreeJS.linematerial(Dict(:color=>"yellow"))
+            ThreeJS.linematerial(Dict(
+            :kind=>"basic",
+            :color=>"#ff3333",
+            :linewidth=>2
+            ))
         ],
-        [ThreeJS.text(map(x->x+0.05,item)...,"$idx") for (idx,item) in enumerate(pts)],
+        [ThreeJS.text(map(x->x+0.08,item)...,"$idx") for (idx,item) in enumerate(pts)],
         pointlight(3.0, 3.0, 3.0),
         camera(0.0, 0.0, 5.0)
     ]

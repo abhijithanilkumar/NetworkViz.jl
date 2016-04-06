@@ -37,12 +37,12 @@ end
         plot = drawGraph(g)
         @test typeof(plot) == Elem{:xhtml,:div}
         #Pass Adjacency Matrix
-        #plot = drawGraph(am,node=n,edge=e,z=0)
-        #@test typeof(plot) == Elem{:xhtml,:div}
-        #plot = drawGraph(am,node=n,edge=e,z=1)
-        #@test typeof(plot) == Elem{:xhtml,:div}
-        #plot = drawGraph(am)
-        #@test typeof(plot) == Elem{:xhtml,:div}
+        plot = drawGraph(am,node=n,edge=e,z=0)
+        @test typeof(plot) == Elem{:xhtml,:div}
+        plot = drawGraph(am,node=n,edge=e,z=1)
+        @test typeof(plot) == Elem{:xhtml,:div}
+        plot = drawGraph(am)
+        @test typeof(plot) == Elem{:xhtml,:div}
         #Pass Digraph
         plot = drawGraph(dgraph,node=n,edge=e,z=0)
         @test typeof(plot) == Elem{:xhtml,:div}
