@@ -31,7 +31,7 @@ main(window) = begin
         map(toggle,num) do t,n
             g = WheelGraph(n)
             c = Color[parse(Colorant,"#00004d") for i in 1:nv(g)]
-            n = NodeProperty(c,0.2,0)
+            n = NodeProperty(c,0.2,1)
             e = EdgeProperty("#ff3333",1)
             drawGraph(g,node=n,edge=e,z=t)
         end

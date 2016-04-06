@@ -103,7 +103,7 @@ function drawnode{T}(pts::Array{T,1},node::NodeProperty)
         :colorkind=>"vertex",
         :transparent=>true,
         :alphatest=>0.5,
-        :texture=>"../assets/disc.png",
+        :texture=>"/pkg/NetworkViz/disc.png",
         ))
       ]
   else
