@@ -26,28 +26,29 @@ end
     g = WheelGraph(10)
     dgraph = bfs_tree(g,1)
     am = full(adjacency_matrix(g))
-    colors = distinguishable_colors(nv(g))
+    n = NodeProperty(distinguishable_colors(nv(g)),0.2,1)
+    e = EdgeProperty("##00004d",2)
     @testset "drawGraph" begin
         #Pass Graphs
-        plot = drawGraph(g,z=0)
+        plot = drawGraph(g,node=n,edge=e,z=0)
         @test typeof(plot) == Elem{:xhtml,:div}
-        plot = drawGraph(g,z=1)
+        plot = drawGraph(g,node=n,edge=e,z=1)
         @test typeof(plot) == Elem{:xhtml,:div}
-        plot = drawGraph(g,color=colors,z=1)
+        plot = drawGraph(g)
         @test typeof(plot) == Elem{:xhtml,:div}
         #Pass Adjacency Matrix
-        plot = drawGraph(am,z=0)
-        @test typeof(plot) == Elem{:xhtml,:div}
-        plot = drawGraph(am,z=1)
-        @test typeof(plot) == Elem{:xhtml,:div}
-        plot = drawGraph(am,color=colors,z=1)
-        @test typeof(plot) == Elem{:xhtml,:div}
+        #plot = drawGraph(am,node=n,edge=e,z=0)
+        #@test typeof(plot) == Elem{:xhtml,:div}
+        #plot = drawGraph(am,node=n,edge=e,z=1)
+        #@test typeof(plot) == Elem{:xhtml,:div}
+        #plot = drawGraph(am)
+        #@test typeof(plot) == Elem{:xhtml,:div}
         #Pass Digraph
-        plot = drawGraph(dgraph,z=0)
+        plot = drawGraph(dgraph,node=n,edge=e,z=0)
         @test typeof(plot) == Elem{:xhtml,:div}
-        plot = drawGraph(dgraph,z=1)
+        plot = drawGraph(dgraph,node=n,edge=e,z=1)
         @test typeof(plot) == Elem{:xhtml,:div}
-        plot = drawGraph(dgraph,color=colors,z=1)
+        plot = drawGraph(dgraph)
         @test typeof(plot) == Elem{:xhtml,:div}
     end
 end

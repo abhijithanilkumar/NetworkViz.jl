@@ -42,19 +42,27 @@ function drawWheel(num::Int,t=1)
     drawGraph(g,z=t)
 end
 
-function drawGraph{T <: Color}(g::Union{LightGraphs.DiGraph,LightGraphs.Graph};color::Vector{T}=Color[parse(Colorant,"blue") for i in 1:nv(g)],z=1)
+function drawGraph(g::Union{LightGraphs.DiGraph,LightGraphs.Graph};
+                               node=NodeProperty(Color[parse(Colorant,"#00004d") for i in 1:nv(g)],0.7,0),
+                               edge=EdgeProperty("#ff3333",2),
+                               z=1
+                              )
     am = full(adjacency_matrix(g))
     loc_x, loc_y, loc_z = layout_spring(am,z)
-    pts = zip(loc_x,loc_y,loc_z,color)
+    pts = zip(loc_x,loc_y,loc_z,node.color)
     if z == 1
         vertices = find_edges(loc_x, loc_y, loc_z, am)
     else
         vertices = find_edges(loc_x, loc_y, am)
     end
-    plot(collect(pts),vertices)
+    plot(collect(pts),vertices, node, edge)
 end
 
-function drawGraph{T <: Color}(am::Array{Int64,2};color::Vector{T}=Color[parse(Colorant,"#00004d") for i in 1:size(am,1)],z=1)
+function drawGraph(am::Array{Int64,2};
+                            node=NodeProperty(Color[parse(Colorant,"#00004d") for i in 1:size(am,1)],0.7,0),
+                            edge=EdgeProperty("#ff3333",2),
+                            z=1
+                           )
     loc_x, loc_y, loc_z = layout_spring(am,z)
     pts = zip(loc_x,loc_y,loc_z,color)
     if z == 1
@@ -62,7 +70,7 @@ function drawGraph{T <: Color}(am::Array{Int64,2};color::Vector{T}=Color[parse(C
     else
         vertices = find_edges(loc_x, loc_y, am)
     end
-    plot(collect(pts),vertices)
+    plot(collect(pts),vertices, node, edge)
 end
 
 function addEdge(g::Graph, node1::Int, node2::Int, t=1)
@@ -85,25 +93,46 @@ function removeNode(g::Graph, node::Int, t=1)
     drawGraph(g,z=t)
 end
 
-function plot{T}(pts::Array{T,1}, vertices::Array{Tuple{Float64,Float64,Float64},1})
-  outerdiv() <<
-  (
-  initscene() <<
-  [
+function drawnode{T}(pts::Array{T,1},node::NodeProperty)
+  if node.shape == 1
       ThreeJS.pointcloud(collect(pts)) <<
       [
         ThreeJS.pointmaterial(Dict(
         :color=>"white",
-        :size=>0.2,
+        :size=>node.size,
         :colorkind=>"vertex",
         :transparent=>true,
-        :texture=>"/assets/disc.png",
-        :alphatest=>0.5
+        :alphatest=>0.5,
+        :texture=>"../assets/disc.png",
         ))
-      ],
+      ]
+  else
+      ThreeJS.pointcloud(collect(pts)) <<
+      [
+        ThreeJS.pointmaterial(Dict(
+        :color=>"white",
+        :size=>node.size,
+        :colorkind=>"vertex",
+        :transparent=>true,
+        :alphatest=>0.5,
+        ))
+      ]
+  end
+end
+
+function plot{T}(pts::Array{T,1}, vertices::Array{Tuple{Float64,Float64,Float64},1}, node::NodeProperty, edge::EdgeProperty)
+  outerdiv() <<
+  (
+  initscene() <<
+  [
+      drawnode(pts,node),
       ThreeJS.line(vertices,kind="pieces") <<
       [
-          ThreeJS.linematerial(Dict(:color=>"#ff3333"))
+          ThreeJS.linematerial(Dict(
+          :kind=>"basic",
+          :color=>"$(edge.color)",
+          :linewidth=>"$(edge.width)"
+          ))
       ],
       pointlight(3.0, 3.0, 3.0),
       camera(0.0, 0.0, 5.0)
