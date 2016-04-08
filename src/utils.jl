@@ -58,7 +58,7 @@ function drawGraph(g::Union{LightGraphs.DiGraph,LightGraphs.Graph};
     plot(collect(pts),vertices, node, edge)
 end
 
-function drawGraph(am::Array{Int64,2};
+function drawGraph(am::Array{Int,2};
                             node=NodeProperty(Color[parse(Colorant,"#00004d") for i in 1:size(am,1)],0.5,1),
                             edge=EdgeProperty("#ff3333",2),
                             z=1
