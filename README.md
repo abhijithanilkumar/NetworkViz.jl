@@ -72,6 +72,7 @@ main(window) = begin
 end
 ```
 The above code produces the following output :
+
 ![alt tag](https://raw.githubusercontent.com/abhijithanilkumar/NetworkViz.jl/master/examples/networkviz.gif)
 
 
