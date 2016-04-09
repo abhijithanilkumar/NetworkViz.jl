@@ -61,33 +61,18 @@ drawGraph(dgraph,z=1) #Draw a Digraph.
 ## Examples
 
 ```julia
-using LightGraphs
+#Run this code in Escher
 using NetworkViz
-using ThreeJS
-
+using LightGraphs
 main(window) = begin
-    num = Signal(10)
-
-    push!(window.assets,("ThreeJS","threejs"))
-    push!(window.assets,"widgets")
-        vbox(
-        h1("WheelGraph Example"),
-        vskip(2em),
-        vbox(
-            "Number of Nodes",
-            slider(10:100) >>> num
-        ),
-        vskip(2em),
-
-        map(num) do n
-            g = WheelGraph(n)
-            drawGraph(g,z=1)
-        end
-        ) |> pad(2em)
+  push!(window.assets, "widgets")
+  push!(window.assets,("ThreeJS","threejs"))
+  g = CompleteGraph(10)
+  drawGraph(g)
 end
 ```
-
-The above example when run in Escher shows the visualization of a `WheelGraph` based on input from the slider. The working demo can be seen [here](https://youtu.be/qd8LmY2XBHg).
+The above code produces the following output :
+![alt tag](https://raw.githubusercontent.com/abhijithanilkumar/NetworkViz.jl/master/examples/networkviz.gif)
 
 
 [Here](https://github.com/abhijithanilkumar/NetworkViz.jl/blob/master/examples/codemirror.jl) is another example with a code-mirror where functions can be typed in. Depending on the LightGraphs function used, 2D as well as 3D graphs are drawn. You can see the working demo [here](https://www.youtube.com/watch?v=Ac3cneCRTZo).
